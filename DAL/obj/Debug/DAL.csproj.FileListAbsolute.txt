@@ -1,0 +1,6 @@
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\DAL\bin\Debug\DAL.dll
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\DAL\bin\Debug\DAL.pdb
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\DAL\obj\Debug\DAL.dll
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\DAL\obj\Debug\DAL.pdb

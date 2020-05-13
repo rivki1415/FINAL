@@ -1,0 +1,9 @@
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\DTO\bin\Debug\DTO.dll
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\DTO\bin\Debug\DTO.pdb
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\DTO\bin\Debug\DAL.dll
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\DTO\bin\Debug\DAL.pdb
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\DTO\obj\Debug\DTO.csprojAssemblyReference.cache
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\DTO\obj\Debug\DTO.csproj.CopyComplete
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\DTO\obj\Debug\DTO.dll
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\DTO\obj\Debug\DTO.pdb

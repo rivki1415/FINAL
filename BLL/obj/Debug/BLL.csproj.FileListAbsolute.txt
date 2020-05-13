@@ -1,0 +1,11 @@
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\BLL\bin\Debug\BLL.dll
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\BLL\bin\Debug\BLL.pdb
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\BLL\bin\Debug\DAL.dll
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\BLL\bin\Debug\DTO.dll
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\BLL\bin\Debug\DAL.pdb
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\BLL\bin\Debug\DTO.pdb
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\BLL\obj\Debug\BLL.csprojAssemblyReference.cache
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\BLL\obj\Debug\BLL.csproj.CopyComplete
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\BLL\obj\Debug\BLL.dll
+Y:\תשפ\3\חני פרידמן\FinalProject\Mekorit\BLL\obj\Debug\BLL.pdb

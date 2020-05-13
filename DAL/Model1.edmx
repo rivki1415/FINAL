@@ -1,0 +1,870 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MekoritDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Branches">
+          <Key>
+            <PropertyRef Name="branchId" />
+          </Key>
+          <Property Name="branchId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="branchAdress" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="branchPhone1" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="branchPhone2" Type="nchar" MaxLength="10" />
+          <Property Name="branchCity" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Covers">
+          <Key>
+            <PropertyRef Name="coverId" />
+          </Key>
+          <Property Name="coverId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="coverName" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="sharing" Type="bit" Nullable="false" />
+          <Property Name="rating" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="customerId" />
+          </Key>
+          <Property Name="customerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customerAdress" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="customerPhone1" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="customerPhone2" Type="nchar" MaxLength="15" />
+          <Property Name="customerFirstName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="customerLastName" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DesignedItems">
+          <Key>
+            <PropertyRef Name="designedItemId" />
+          </Key>
+          <Property Name="designedItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sheetTypeId" Type="int" Nullable="false" />
+          <Property Name="routingToJsonFile" Type="nchar" MaxLength="25" />
+          <Property Name="routingToJpegFile" Type="nchar" MaxLength="25" />
+          <Property Name="coverId" Type="int" />
+          <Property Name="isSaved" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Elements">
+          <Key>
+            <PropertyRef Name="elementId" />
+          </Key>
+          <Property Name="elementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="elementRouting" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="elementName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="typeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ElementsTypes">
+          <Key>
+            <PropertyRef Name="typeId" />
+          </Key>
+          <Property Name="typeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OpeningHours">
+          <Key>
+            <PropertyRef Name="openingHourID" />
+          </Key>
+          <Property Name="openingHourID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="branchId" Type="int" Nullable="false" />
+          <Property Name="fromDay" Type="int" Nullable="false" />
+          <Property Name="toDay" Type="int" Nullable="false" />
+          <Property Name="fromHour" Type="time" Precision="7" Nullable="false" />
+          <Property Name="toHour" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="orderId" />
+          </Key>
+          <Property Name="orderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="orderDate" Type="date" Nullable="false" />
+          <Property Name="branchId" Type="int" Nullable="false" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+          <Property Name="totalPrice" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrdersDetails">
+          <Key>
+            <PropertyRef Name="orderId" />
+            <PropertyRef Name="designedItemId" />
+          </Key>
+          <Property Name="orderId" Type="int" Nullable="false" />
+          <Property Name="designedItemId" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Prices">
+          <Key>
+            <PropertyRef Name="priceId" />
+          </Key>
+          <Property Name="priceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sheetTypeId" Type="int" Nullable="false" />
+          <Property Name="selfDesign" Type="bit" Nullable="false" />
+          <Property Name="price" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SheetsTypes">
+          <Key>
+            <PropertyRef Name="sheetTypeId" />
+          </Key>
+          <Property Name="sheetTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="height" Type="float" Nullable="false" />
+          <Property Name="width" Type="float" Nullable="false" />
+          <Property Name="pagesInPackage" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="statusId" />
+          </Key>
+          <Property Name="statusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="statusDescription" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userName" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="userMail" Type="nchar" MaxLength="10" />
+          <Property Name="userPassword" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="isAdmin" Type="bit" Nullable="false" />
+          <Property Name="receiveingUpdates" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Covers_ToTable">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Covers" Type="Self.Covers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="Covers">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_ToTable">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DesignedItems_ToTable">
+          <End Role="SheetsTypes" Type="Self.SheetsTypes" Multiplicity="1" />
+          <End Role="DesignedItems" Type="Self.DesignedItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SheetsTypes">
+              <PropertyRef Name="sheetTypeId" />
+            </Principal>
+            <Dependent Role="DesignedItems">
+              <PropertyRef Name="sheetTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DesignedItems_ToTable_1">
+          <End Role="Covers" Type="Self.Covers" Multiplicity="0..1" />
+          <End Role="DesignedItems" Type="Self.DesignedItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Covers">
+              <PropertyRef Name="coverId" />
+            </Principal>
+            <Dependent Role="DesignedItems">
+              <PropertyRef Name="coverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Elements_ToTable">
+          <End Role="ElementsTypes" Type="Self.ElementsTypes" Multiplicity="1" />
+          <End Role="Elements" Type="Self.Elements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ElementsTypes">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="Elements">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OpeningHours_ToTable">
+          <End Role="Branches" Type="Self.Branches" Multiplicity="1" />
+          <End Role="OpeningHours" Type="Self.OpeningHours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="branchId" />
+            </Principal>
+            <Dependent Role="OpeningHours">
+              <PropertyRef Name="branchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ToTable">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ToTable_1">
+          <End Role="Branches" Type="Self.Branches" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="branchId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="branchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ToTable_2">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="statusId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdersDetails_ToTable">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrdersDetails" Type="Self.OrdersDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="orderId" />
+            </Principal>
+            <Dependent Role="OrdersDetails">
+              <PropertyRef Name="orderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdersDetails_ToTable_1">
+          <End Role="DesignedItems" Type="Self.DesignedItems" Multiplicity="1" />
+          <End Role="OrdersDetails" Type="Self.OrdersDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DesignedItems">
+              <PropertyRef Name="designedItemId" />
+            </Principal>
+            <Dependent Role="OrdersDetails">
+              <PropertyRef Name="designedItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prices_ToTable">
+          <End Role="SheetsTypes" Type="Self.SheetsTypes" Multiplicity="1" />
+          <End Role="Prices" Type="Self.Prices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SheetsTypes">
+              <PropertyRef Name="sheetTypeId" />
+            </Principal>
+            <Dependent Role="Prices">
+              <PropertyRef Name="sheetTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MekoritDBModelStoreContainer">
+          <EntitySet Name="Branches" EntityType="Self.Branches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Covers" EntityType="Self.Covers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DesignedItems" EntityType="Self.DesignedItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Elements" EntityType="Self.Elements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ElementsTypes" EntityType="Self.ElementsTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OpeningHours" EntityType="Self.OpeningHours" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdersDetails" EntityType="Self.OrdersDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prices" EntityType="Self.Prices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SheetsTypes" EntityType="Self.SheetsTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statuses" EntityType="Self.Statuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Covers_ToTable" Association="Self.FK_Covers_ToTable">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Covers" EntitySet="Covers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_ToTable" Association="Self.FK_Customers_ToTable">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DesignedItems_ToTable" Association="Self.FK_DesignedItems_ToTable">
+            <End Role="SheetsTypes" EntitySet="SheetsTypes" />
+            <End Role="DesignedItems" EntitySet="DesignedItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DesignedItems_ToTable_1" Association="Self.FK_DesignedItems_ToTable_1">
+            <End Role="Covers" EntitySet="Covers" />
+            <End Role="DesignedItems" EntitySet="DesignedItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Elements_ToTable" Association="Self.FK_Elements_ToTable">
+            <End Role="ElementsTypes" EntitySet="ElementsTypes" />
+            <End Role="Elements" EntitySet="Elements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OpeningHours_ToTable" Association="Self.FK_OpeningHours_ToTable">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="OpeningHours" EntitySet="OpeningHours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ToTable" Association="Self.FK_Orders_ToTable">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ToTable_1" Association="Self.FK_Orders_ToTable_1">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ToTable_2" Association="Self.FK_Orders_ToTable_2">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdersDetails_ToTable" Association="Self.FK_OrdersDetails_ToTable">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrdersDetails" EntitySet="OrdersDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdersDetails_ToTable_1" Association="Self.FK_OrdersDetails_ToTable_1">
+            <End Role="DesignedItems" EntitySet="DesignedItems" />
+            <End Role="OrdersDetails" EntitySet="OrdersDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prices_ToTable" Association="Self.FK_Prices_ToTable">
+            <End Role="SheetsTypes" EntitySet="SheetsTypes" />
+            <End Role="Prices" EntitySet="Prices" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MekoritDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Branch">
+          <Key>
+            <PropertyRef Name="branchId" />
+          </Key>
+          <Property Name="branchId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="branchAdress" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="branchPhone1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="branchPhone2" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="branchCity" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="OpeningHours" Relationship="Self.FK_OpeningHours_ToTable" FromRole="Branches" ToRole="OpeningHours" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_ToTable_1" FromRole="Branches" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Cover">
+          <Key>
+            <PropertyRef Name="coverId" />
+          </Key>
+          <Property Name="coverId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="coverName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="sharing" Type="Boolean" Nullable="false" />
+          <Property Name="rating" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Covers_ToTable" FromRole="Covers" ToRole="Users" />
+          <NavigationProperty Name="DesignedItems" Relationship="Self.FK_DesignedItems_ToTable_1" FromRole="Covers" ToRole="DesignedItems" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="customerId" />
+          </Key>
+          <Property Name="customerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customerAdress" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="customerPhone1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="customerPhone2" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="customerFirstName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="customerLastName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Customers_ToTable" FromRole="Customers" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="DesignedItem">
+          <Key>
+            <PropertyRef Name="designedItemId" />
+          </Key>
+          <Property Name="designedItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sheetTypeId" Type="Int32" Nullable="false" />
+          <Property Name="routingToJsonFile" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="routingToJpegFile" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="coverId" Type="Int32" />
+          <Property Name="isSaved" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cover" Relationship="Self.FK_DesignedItems_ToTable_1" FromRole="DesignedItems" ToRole="Covers" />
+          <NavigationProperty Name="SheetsType" Relationship="Self.FK_DesignedItems_ToTable" FromRole="DesignedItems" ToRole="SheetsTypes" />
+          <NavigationProperty Name="OrdersDetails" Relationship="Self.FK_OrdersDetails_ToTable_1" FromRole="DesignedItems" ToRole="OrdersDetails" />
+        </EntityType>
+        <EntityType Name="Element">
+          <Key>
+            <PropertyRef Name="elementId" />
+          </Key>
+          <Property Name="elementId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="elementRouting" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="elementName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="typeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ElementsType" Relationship="Self.FK_Elements_ToTable" FromRole="Elements" ToRole="ElementsTypes" />
+        </EntityType>
+        <EntityType Name="ElementsType">
+          <Key>
+            <PropertyRef Name="typeId" />
+          </Key>
+          <Property Name="typeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Elements" Relationship="Self.FK_Elements_ToTable" FromRole="ElementsTypes" ToRole="Elements" />
+        </EntityType>
+        <EntityType Name="OpeningHour">
+          <Key>
+            <PropertyRef Name="openingHourID" />
+          </Key>
+          <Property Name="openingHourID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="branchId" Type="Int32" Nullable="false" />
+          <Property Name="fromDay" Type="Int32" Nullable="false" />
+          <Property Name="toDay" Type="Int32" Nullable="false" />
+          <Property Name="fromHour" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="toHour" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Branch" Relationship="Self.FK_OpeningHours_ToTable" FromRole="OpeningHours" ToRole="Branches" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="orderId" />
+          </Key>
+          <Property Name="orderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="branchId" Type="Int32" Nullable="false" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <Property Name="totalPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Branch" Relationship="Self.FK_Orders_ToTable_1" FromRole="Orders" ToRole="Branches" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Orders_ToTable" FromRole="Orders" ToRole="Users" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Orders_ToTable_2" FromRole="Orders" ToRole="Statuses" />
+          <NavigationProperty Name="OrdersDetails" Relationship="Self.FK_OrdersDetails_ToTable" FromRole="Orders" ToRole="OrdersDetails" />
+        </EntityType>
+        <EntityType Name="OrdersDetail">
+          <Key>
+            <PropertyRef Name="orderId" />
+            <PropertyRef Name="designedItemId" />
+          </Key>
+          <Property Name="orderId" Type="Int32" Nullable="false" />
+          <Property Name="designedItemId" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DesignedItem" Relationship="Self.FK_OrdersDetails_ToTable_1" FromRole="OrdersDetails" ToRole="DesignedItems" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrdersDetails_ToTable" FromRole="OrdersDetails" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Price">
+          <Key>
+            <PropertyRef Name="priceId" />
+          </Key>
+          <Property Name="priceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sheetTypeId" Type="Int32" Nullable="false" />
+          <Property Name="selfDesign" Type="Boolean" Nullable="false" />
+          <Property Name="price1" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="SheetsType" Relationship="Self.FK_Prices_ToTable" FromRole="Prices" ToRole="SheetsTypes" />
+        </EntityType>
+        <EntityType Name="SheetsType">
+          <Key>
+            <PropertyRef Name="sheetTypeId" />
+          </Key>
+          <Property Name="sheetTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="height" Type="Double" Nullable="false" />
+          <Property Name="width" Type="Double" Nullable="false" />
+          <Property Name="pagesInPackage" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DesignedItems" Relationship="Self.FK_DesignedItems_ToTable" FromRole="SheetsTypes" ToRole="DesignedItems" />
+          <NavigationProperty Name="Prices" Relationship="Self.FK_Prices_ToTable" FromRole="SheetsTypes" ToRole="Prices" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="statusId" />
+          </Key>
+          <Property Name="statusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="statusDescription" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_ToTable_2" FromRole="Statuses" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userName" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="userMail" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="userPassword" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="isAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="receiveingUpdates" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Covers" Relationship="Self.FK_Covers_ToTable" FromRole="Users" ToRole="Covers" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Customers_ToTable" FromRole="Users" ToRole="Customers" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_ToTable" FromRole="Users" ToRole="Orders" />
+        </EntityType>
+        <Association Name="FK_OpeningHours_ToTable">
+          <End Role="Branches" Type="Self.Branch" Multiplicity="1" />
+          <End Role="OpeningHours" Type="Self.OpeningHour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="branchId" />
+            </Principal>
+            <Dependent Role="OpeningHours">
+              <PropertyRef Name="branchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ToTable_1">
+          <End Role="Branches" Type="Self.Branch" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="branchId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="branchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Covers_ToTable">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Covers" Type="Self.Cover" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="Covers">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DesignedItems_ToTable_1">
+          <End Role="Covers" Type="Self.Cover" Multiplicity="0..1" />
+          <End Role="DesignedItems" Type="Self.DesignedItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Covers">
+              <PropertyRef Name="coverId" />
+            </Principal>
+            <Dependent Role="DesignedItems">
+              <PropertyRef Name="coverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_ToTable">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DesignedItems_ToTable">
+          <End Role="SheetsTypes" Type="Self.SheetsType" Multiplicity="1" />
+          <End Role="DesignedItems" Type="Self.DesignedItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SheetsTypes">
+              <PropertyRef Name="sheetTypeId" />
+            </Principal>
+            <Dependent Role="DesignedItems">
+              <PropertyRef Name="sheetTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdersDetails_ToTable_1">
+          <End Role="DesignedItems" Type="Self.DesignedItem" Multiplicity="1" />
+          <End Role="OrdersDetails" Type="Self.OrdersDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DesignedItems">
+              <PropertyRef Name="designedItemId" />
+            </Principal>
+            <Dependent Role="OrdersDetails">
+              <PropertyRef Name="designedItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Elements_ToTable">
+          <End Role="ElementsTypes" Type="Self.ElementsType" Multiplicity="1" />
+          <End Role="Elements" Type="Self.Element" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ElementsTypes">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="Elements">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ToTable">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ToTable_2">
+          <End Role="Statuses" Type="Self.Status" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="statusId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdersDetails_ToTable">
+          <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrdersDetails" Type="Self.OrdersDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="orderId" />
+            </Principal>
+            <Dependent Role="OrdersDetails">
+              <PropertyRef Name="orderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prices_ToTable">
+          <End Role="SheetsTypes" Type="Self.SheetsType" Multiplicity="1" />
+          <End Role="Prices" Type="Self.Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SheetsTypes">
+              <PropertyRef Name="sheetTypeId" />
+            </Principal>
+            <Dependent Role="Prices">
+              <PropertyRef Name="sheetTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MekoritDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Branches" EntityType="Self.Branch" />
+          <EntitySet Name="Covers" EntityType="Self.Cover" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="DesignedItems" EntityType="Self.DesignedItem" />
+          <EntitySet Name="Elements" EntityType="Self.Element" />
+          <EntitySet Name="ElementsTypes" EntityType="Self.ElementsType" />
+          <EntitySet Name="OpeningHours" EntityType="Self.OpeningHour" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="OrdersDetails" EntityType="Self.OrdersDetail" />
+          <EntitySet Name="Prices" EntityType="Self.Price" />
+          <EntitySet Name="SheetsTypes" EntityType="Self.SheetsType" />
+          <EntitySet Name="Statuses" EntityType="Self.Status" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_OpeningHours_ToTable" Association="Self.FK_OpeningHours_ToTable">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="OpeningHours" EntitySet="OpeningHours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ToTable_1" Association="Self.FK_Orders_ToTable_1">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Covers_ToTable" Association="Self.FK_Covers_ToTable">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Covers" EntitySet="Covers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DesignedItems_ToTable_1" Association="Self.FK_DesignedItems_ToTable_1">
+            <End Role="Covers" EntitySet="Covers" />
+            <End Role="DesignedItems" EntitySet="DesignedItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_ToTable" Association="Self.FK_Customers_ToTable">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DesignedItems_ToTable" Association="Self.FK_DesignedItems_ToTable">
+            <End Role="SheetsTypes" EntitySet="SheetsTypes" />
+            <End Role="DesignedItems" EntitySet="DesignedItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdersDetails_ToTable_1" Association="Self.FK_OrdersDetails_ToTable_1">
+            <End Role="DesignedItems" EntitySet="DesignedItems" />
+            <End Role="OrdersDetails" EntitySet="OrdersDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Elements_ToTable" Association="Self.FK_Elements_ToTable">
+            <End Role="ElementsTypes" EntitySet="ElementsTypes" />
+            <End Role="Elements" EntitySet="Elements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ToTable" Association="Self.FK_Orders_ToTable">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ToTable_2" Association="Self.FK_Orders_ToTable_2">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdersDetails_ToTable" Association="Self.FK_OrdersDetails_ToTable">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrdersDetails" EntitySet="OrdersDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prices_ToTable" Association="Self.FK_Prices_ToTable">
+            <End Role="SheetsTypes" EntitySet="SheetsTypes" />
+            <End Role="Prices" EntitySet="Prices" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MekoritDBModelStoreContainer" CdmEntityContainer="MekoritDBEntities">
+          <EntitySetMapping Name="Branches">
+            <EntityTypeMapping TypeName="MekoritDBModel.Branch">
+              <MappingFragment StoreEntitySet="Branches">
+                <ScalarProperty Name="branchId" ColumnName="branchId" />
+                <ScalarProperty Name="branchAdress" ColumnName="branchAdress" />
+                <ScalarProperty Name="branchPhone1" ColumnName="branchPhone1" />
+                <ScalarProperty Name="branchPhone2" ColumnName="branchPhone2" />
+                <ScalarProperty Name="branchCity" ColumnName="branchCity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Covers">
+            <EntityTypeMapping TypeName="MekoritDBModel.Cover">
+              <MappingFragment StoreEntitySet="Covers">
+                <ScalarProperty Name="coverId" ColumnName="coverId" />
+                <ScalarProperty Name="coverName" ColumnName="coverName" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="sharing" ColumnName="sharing" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="MekoritDBModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="customerAdress" ColumnName="customerAdress" />
+                <ScalarProperty Name="customerPhone1" ColumnName="customerPhone1" />
+                <ScalarProperty Name="customerPhone2" ColumnName="customerPhone2" />
+                <ScalarProperty Name="customerFirstName" ColumnName="customerFirstName" />
+                <ScalarProperty Name="customerLastName" ColumnName="customerLastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DesignedItems">
+            <EntityTypeMapping TypeName="MekoritDBModel.DesignedItem">
+              <MappingFragment StoreEntitySet="DesignedItems">
+                <ScalarProperty Name="designedItemId" ColumnName="designedItemId" />
+                <ScalarProperty Name="sheetTypeId" ColumnName="sheetTypeId" />
+                <ScalarProperty Name="routingToJsonFile" ColumnName="routingToJsonFile" />
+                <ScalarProperty Name="routingToJpegFile" ColumnName="routingToJpegFile" />
+                <ScalarProperty Name="coverId" ColumnName="coverId" />
+                <ScalarProperty Name="isSaved" ColumnName="isSaved" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Elements">
+            <EntityTypeMapping TypeName="MekoritDBModel.Element">
+              <MappingFragment StoreEntitySet="Elements">
+                <ScalarProperty Name="elementId" ColumnName="elementId" />
+                <ScalarProperty Name="elementRouting" ColumnName="elementRouting" />
+                <ScalarProperty Name="elementName" ColumnName="elementName" />
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ElementsTypes">
+            <EntityTypeMapping TypeName="MekoritDBModel.ElementsType">
+              <MappingFragment StoreEntitySet="ElementsTypes">
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OpeningHours">
+            <EntityTypeMapping TypeName="MekoritDBModel.OpeningHour">
+              <MappingFragment StoreEntitySet="OpeningHours">
+                <ScalarProperty Name="openingHourID" ColumnName="openingHourID" />
+                <ScalarProperty Name="branchId" ColumnName="branchId" />
+                <ScalarProperty Name="fromDay" ColumnName="fromDay" />
+                <ScalarProperty Name="toDay" ColumnName="toDay" />
+                <ScalarProperty Name="fromHour" ColumnName="fromHour" />
+                <ScalarProperty Name="toHour" ColumnName="toHour" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="MekoritDBModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+                <ScalarProperty Name="branchId" ColumnName="branchId" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdersDetails">
+            <EntityTypeMapping TypeName="MekoritDBModel.OrdersDetail">
+              <MappingFragment StoreEntitySet="OrdersDetails">
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="designedItemId" ColumnName="designedItemId" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prices">
+            <EntityTypeMapping TypeName="MekoritDBModel.Price">
+              <MappingFragment StoreEntitySet="Prices">
+                <ScalarProperty Name="priceId" ColumnName="priceId" />
+                <ScalarProperty Name="sheetTypeId" ColumnName="sheetTypeId" />
+                <ScalarProperty Name="selfDesign" ColumnName="selfDesign" />
+                <ScalarProperty Name="price1" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SheetsTypes">
+            <EntityTypeMapping TypeName="MekoritDBModel.SheetsType">
+              <MappingFragment StoreEntitySet="SheetsTypes">
+                <ScalarProperty Name="sheetTypeId" ColumnName="sheetTypeId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="height" ColumnName="height" />
+                <ScalarProperty Name="width" ColumnName="width" />
+                <ScalarProperty Name="pagesInPackage" ColumnName="pagesInPackage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statuses">
+            <EntityTypeMapping TypeName="MekoritDBModel.Status">
+              <MappingFragment StoreEntitySet="Statuses">
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="statusDescription" ColumnName="statusDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MekoritDBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="userMail" ColumnName="userMail" />
+                <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+                <ScalarProperty Name="receiveingUpdates" ColumnName="receiveingUpdates" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
